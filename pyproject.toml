@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "dolamod"
+version = "0.1.0"
+description = ""
+authors = ["Rijul Saini <rijul.saini@aero.bombardier.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+spacy = "^3.7.4"
+en_core_web_trf = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.7.3/en_core_web_trf-3.7.3.tar.gz"}
+pandas = "^2.2.1"
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
