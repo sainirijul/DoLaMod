@@ -1,0 +1,200 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0  # Use the ref you want to point at
+    hooks:
+      # Ensure no Unicode funniness
+      - id: check-byte-order-marker
+      # Valid Python syntax
+      - id: check-ast
+      # Tests are correctly named
+      - id: name-tests-test
+        exclude: (context.py|test_run.py|test_template.py|/test_utils.py$|datasets.py|helpers.py)
+      # Proper formatting of YAML files
+      - id: check-yaml
+        exclude: (docker/.*/docker_template.yaml)
+      # Proper formatting of JSON files
+      - id: check-json
+      # End of line whitespace
+      - id: trailing-whitespace
+        exclude: (^(.idea|.*/exploration/.*))
+      # Single blank line at end of Python files
+      - id: end-of-file-fixer
+        exclude: (^(.idea|\.ipynb$|.*/exploration/.*))
+      # Check for HEAD tags for merge conflicts
+      - id: check-merge-conflict
+      # Restrict adding large files to repo
+      - id: check-added-large-files
+        args:
+          - –maxkb=1000
+      # Protect repo structure
+      - id: forbid-new-submodules
+      # Protect repo branches
+      - id: no-commit-to-branch
+        args:
+          - --branch
+          - develop
+          - --branch
+          - master
+          - --branch
+          - main
+
+  # ---------
+  # poetry
+  # ---------
+
+  - repo: https://github.com/python-poetry/poetry
+    rev: 1.4.2
+    hooks:
+      - id: poetry-check
+      - id: poetry-lock
+        args: ["--check"]
+
+  # ---------
+  # isort
+  # ---------
+
+  - repo: https://github.com/timothycrosley/isort
+    rev: 5.12.0
+    hooks:
+      # Sort and format Python imports
+      - id: isort
+        name: isort - import formatting
+        args:
+          - --profile
+          - black
+        files: \.py$
+        exclude: jupyter/.*
+
+  # ---------
+  # jupytext
+  # ---------
+
+  - repo: https://github.com/mwouts/jupytext
+    rev: v1.14.5
+    hooks:
+      - id: jupytext
+        args: [ --sync, --pipe, black ]
+        additional_dependencies:
+          - black==23.3.0 # Matches hook
+
+  # ---------
+  # black
+  # ---------
+
+  - repo: https://github.com/psf/black
+    rev: 23.3.0
+    hooks:
+      - id: black
+        language_version: python3
+        args:
+          - --config=pyproject.toml
+
+  # ---------
+  # pyupgrade
+  # ---------
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.4.0
+    hooks:
+      # Enforce latest Python conventions
+      - id: pyupgrade
+        args: [ --py38-plus ]
+        exclude: .*/exploration/.*
+
+  # ---------
+  # pydocstyle
+  # ---------
+
+  - repo: https://github.com/pycqa/pydocstyle
+    rev: 6.3.0
+    hooks:
+      # Check documentation in Python files
+      - id: pydocstyle
+        alias: pydocstyle - python
+        name: pydocstyle-py
+        args:
+          - --config=.pydocstyle
+        files: ^test/
+        exclude: (context.py|test_template.py|.*/[^/]*_test\.py$)
+      # Check documentation in notebooks
+      - id: pydocstyle
+        alias: pydocstyle-dbnb
+        name: pydocstyle - notebooks
+        args:
+          - --config=.pydocstyle
+          - --add-ignore=D100
+        files: ^test/(Databricks|Jupyter)/
+        exclude: (context.py|test_template.py|.*/[^/]*_test\.py$|.*/exploration/.*)
+
+  # ---------
+  # flake8
+  # ---------
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
+    hooks:
+      # Python styling checker
+      - id: flake8
+        args:
+          - --config=setup.cfg
+        exclude: (context.py|test_template.py|.*/exploration/.*|jupyter/.*)
+
+  # ---------
+  # bandit
+  # ---------
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.5
+    hooks:
+      # Python security checks
+      - id: bandit
+        args:
+          # Skipping
+          # B311 - Use of ``random`` lib, which isn't suitable for cryptography
+          # B404 - Use of ``subprocess`` lib
+          # B506 - Unsafe loading of YAML files (could inject code in YAML file)
+          # B701 - Jinja2 configured to disable automatic escaping of HTML submissions
+          - --skip
+          - B311,B404,B506,B701
+        exclude: (.*/(test_[^/]*|[^/]*_test)\.py$|.*/exploration/.*|jupyter/.*)
+
+  # ---------
+  # pylint
+  # ---------
+
+# FIXME This freezes
+#  - repo: local
+#    hooks:
+#    - id: pylint
+#      name: pylint
+#      entry: pylint
+#      language: system
+#      types: [python]
+#      args:
+#        [
+#          "-rn", # Only display messages
+#          "-sn", # Don't display the score
+#        ]
+
+  # ---------
+  # mypy
+  # ---------
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.3.0
+    hooks:
+      - id: mypy
+        name: mypy (src)
+        files: ^src/
+        exclude: ^src/tests/
+        additional_dependencies: [
+          boto3-stubs,
+#          pandas-stubs,  # TODO: To be activated someday...
+          pyarrow-stubs,
+#          pyspark-stubs,
+          types-python-dateutil,
+          types-pytz,
+          types-pyyaml,
+          types-setuptools,
+        ]
+#        args: [--strict]   # TODO: To be activated someday...
