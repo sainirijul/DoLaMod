@@ -9,9 +9,10 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "python": "${workspaceFolder}/.venv/bin/python",
+            "python": "${workspaceFolder}/.venv/bin/python3",
             "console": "integratedTerminal",
+            "env": { "PYTHONPATH": "${workspaceRoot}/"},
             "justMyCode": true
-        }
+        },
     ]
 }

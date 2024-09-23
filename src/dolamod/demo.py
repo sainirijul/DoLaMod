@@ -5,10 +5,9 @@ from rules_nlp.relationships_extractor import RelationshipsExtractor
 
 
 class Dolamod:
-    def __init__(self, domain_description: str) -> None:
-        self.domain_description = domain_description
+    def __init__(self, domain_description) -> None:
         self.language_model = spacy.load("en_core_web_lg")
-        self.domain_doc = self.language_model(self.domain_description)
+        self.domain_doc = self.language_model(domain_description)
         self.glove = GloveVectorizer(self.language_model)
 
     """
@@ -58,6 +57,6 @@ class Dolamod:
 
 if __name__ == "__main__":
     dolamod = Dolamod(
-        "University is composed of departments. Each department has a title."
+        "University is composed of departments. They have a title and an ID."
     )
     dolamod.process()

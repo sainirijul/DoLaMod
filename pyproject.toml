@@ -10,10 +10,13 @@ packages = [{include = "src"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 spacy = "^3.7.4"
-en_core_web_trf = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.7.3/en_core_web_trf-3.7.3.tar.gz"}
+en_core_web_lg = {url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.7.1/en_core_web_lg-3.7.1.tar.gz"}
 pandas = "^2.2.1"
 word2number = "^1.1"
 pre-commit = "^3.7.0"
+scikit-learn = "^1.5.1"
+imblearn = "^0.0"
+gensim = "^4.3.3"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.7.0"
