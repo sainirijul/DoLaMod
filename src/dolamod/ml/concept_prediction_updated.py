@@ -143,13 +143,14 @@ class ConceptsPrediction:
 
 if __name__ == "__main__":
     predictor = ConceptsPrediction()
-    # predictor.train_models()
+    predictor.train_models()
     print(
         "Prediction for 'presentation time':",
         predictor.predict_category("presentation time"),
     )
 
     print("For concept User ", predictor.predict_category("user"))
+    print("For concept Day ", predictor.predict_category("day"))
     print("\nFor concept name ", predictor.predict_category("name"))
     print("\nFor concept University ", predictor.predict_category("University"))
     print("\nFor concept Department ", predictor.predict_category("Department"))
