@@ -1,0 +1,72 @@
+concept,qualifier,context,type
+balance,,account,Int
+plate,,car,String
+type,,service,Enum
+address,,garage,String
+warranty,,official garage,Enum
+day,,date,Int
+month,,date,Int
+year,,date,Int
+city,,factory,String
+id,,worker,String
+name,,worker,String
+salary,,worker,Double
+speed,,machine,Double
+capacity,,machine,Int
+width,,piece,Int
+height,,piece,Int
+depth,,piece,Int
+number,,flight,String
+row,,seat,Int
+letter,,seat,Enum
+class,,seat,Enum
+class,,booked flight,Enum
+status,,booked flight,Enum
+name,first ,person,String
+name,middle ,person,String
+name,last ,person,String
+citizenship,,person,Enum
+number,passport ,person,String
+number,room ,room,Int
+status,,room,Enum
+number,,room,Int
+type,bed ,room,Enum
+name,,person,String
+address,,person,String
+number,phone ,person,Int
+creditcard,,person,Int
+number,planned ,booking,Int
+booked,,booking,Int
+level,quality ,quality,Enum
+rate,max daily ,quality,Int
+number,,stay,Int
+barcode,,book copy,Int
+reserve,on ,book copy,Boolean
+name,,member,String
+email,,member,String
+title,,book,String
+name,,member category,String
+books,max number ,member category,Int
+name,,book category,String
+duration,,loan period,Int
+kind,,processing unit,Enum
+kind,,transport unit,Enum
+name,,city,String
+name,,neighborhood,String
+aqi,,neighborhood,Int
+kind,,air quality sensor,Enum
+size,,display,Int
+resolution,,display,Int
+name,,sustainable city,String
+country,,sustainable city,String
+id,,user,String
+name,,user,String
+creditcard,,user,String
+name,,bike station,String
+address,,bike station,String
+spots,,bike station,Int
+code,,bike,Int
+hour,price ,bike,Double
+day,,date,Int
+month,,date,Int
+year,,date,Int

@@ -1,0 +1,6 @@
+,,
+,,
+Model Type,Accuracy,Meta-data
+Original Model (Mean) with Original Data,75.00%,Random Forest Classifier. The return dictionary of probabilities had some issues. Original data including None and Class types.
+,,
+"Model with Qualifier, Context (Concatenate) with Updated Categories",61.00%,"Random Forest Classifier. Performing concatenation of context, qualifier, and concept embeddings. Original data excluding None and Class types."

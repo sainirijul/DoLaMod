@@ -1,0 +1,72 @@
+concept,qualifier,context,type,prediction,probabilities,result
+balance,,account,Int,integer,,True
+plate,,car,String,none,,False
+type,,service,Enum,enumeration,,True
+address,,garage,String,string,,True
+warranty,,official garage,Enum,class,,False
+day,,date,Int,integer,,True
+month,,date,Int,integer,,True
+year,,date,Int,integer,,True
+city,,factory,String,class,,False
+id,,worker,Int,integer,,True
+name,,worker,String,string,,True
+salary,,worker,Double,float,,True
+speed,,machine,Double,float,,True
+capacity,,machine,Int,float,,True
+width,,piece,Int,float,,True
+height,,piece,Int,float,,True
+depth,,piece,Int,float,,True
+number,,flight,String,integer,,False
+row,,seat,Int,integer,,True
+letter,,seat,Enum,string,,False
+class,,seat,Enum,enumeration,,True
+class,,booked flight,Enum,enumeration,,True
+status,,booked flight,Enum,enumeration,,True
+name,first ,person,String,string,,True
+name,middle ,person,String,string,,True
+name,last ,person,String,string,,True
+citizenship,,person,Enum,enumeration,,True
+number,passport ,person,String,integer,,False
+number,room ,room,Int,integer,,True
+status,,room,Enum,enumeration,,True
+number,,room,Int,integer,,True
+type,bed ,room,Enum,enumeration,,True
+name,,person,String,string,,True
+address,,person,String,string,,True
+number,phone ,person,Int,integer,,True
+creditcard,,person,Int,class,,False
+number,planned ,booking,Int,integer,,True
+booked,,booking,Int,class,,False
+level,quality ,quality,Enum,enumeration,,True
+rate,max daily ,quality,Int,float,,True
+number,,stay,Int,integer,,True
+barcode,,book copy,Int,integer,,True
+reserve,on ,book copy,Boolean,class,,False
+name,,member,String,string,,True
+email,,member,String,string,,True
+title,,book,String,string,,True
+name,,member category,String,string,,True
+books,max number ,member category,Int,class,,False
+name,,book category,String,string,,True
+duration,,loan period,Int,time,,False
+kind,,processing unit,Enum,enumeration,,True
+kind,,transport unit,Enum,enumeration,,True
+name,,city,String,string,,True
+name,,neighborhood,String,string,,True
+aqi,,neighborhood,Int,none,,False
+kind,,air quality sensor,Enum,enumeration,,True
+size,,display,Int,float,,True
+resolution,,display,Int,none,,False
+name,,sustainable city,String,string,,True
+country,,sustainable city,String,enumeration,,False
+id,,user,Int,integer,,True
+name,,user,String,string,,True
+creditcard,,user,String,class,,False
+name,,bike station,String,string,,True
+address,,bike station,String,string,,True
+spots,,bike station,Int,class,,False
+code,,bike,Int,string,,False
+hour,price ,bike,Double,class,,False
+day,,date,Int,integer,,True
+month,,date,Int,integer,,True
+year,,date,Int,integer,,True

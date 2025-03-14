@@ -44,7 +44,10 @@ class ConceptsPrediction:
             os.path.join(dirname, "../", "data", "training", "ml_data.csv")
         )
         train_data = pd.read_csv(pathname_train_data)
-        train_data = train_data.sample(frac=1)
+        train_data_filtered = train_data[train_data["type"] != "class"].reset_index(
+            drop=True
+        )
+        train_data = train_data_filtered.sample(frac=1)
 
         # Encode category and type labels
         encoder_category.fit(train_data["category"])
@@ -105,6 +108,33 @@ class ConceptsPrediction:
 
         print("Training completed and models saved!")
 
+    def predict_category_with_probability(self, concept, context="", qualifier=""):
+        dirname = os.path.dirname(__file__)
+
+        # Preprocess text
+        text_vector = np.array([self.preprocess_text(concept)])
+        with open(
+            os.path.join(dirname, "../", "data", "trained_models", "model_type"), "rb"
+        ) as f:
+            model_type = pickle.load(f)
+        with open(
+            os.path.join(dirname, "../", "data", "trained_models", "encoder_type"), "rb"
+        ) as f:
+            encoder_type = pickle.load(f)
+        pred_type = model_type.predict_proba(text_vector)
+
+        temp = {
+            encoder_type.inverse_transform([0])[0]: pred_type[0][0],
+            encoder_type.inverse_transform([1])[0]: pred_type[0][1],
+            encoder_type.inverse_transform([2])[0]: pred_type[0][2],
+            encoder_type.inverse_transform([3])[0]: pred_type[0][3],
+            encoder_type.inverse_transform([4])[0]: pred_type[0][4],
+            encoder_type.inverse_transform([5])[0]: pred_type[0][5],
+        }
+        # pred_type = model_type.predict(text_vector)
+
+        return encoder_type.inverse_transform(pred_type)[0]
+
     def predict_category(self, text):
         dirname = os.path.dirname(__file__)
 
@@ -143,13 +173,15 @@ class ConceptsPrediction:
 
 if __name__ == "__main__":
     predictor = ConceptsPrediction()
-    predictor.train_models()
+    # predictor.train_models()
     print(
         "Prediction for 'presentation time':",
         predictor.predict_category("presentation time"),
     )
 
-    print("For concept User ", predictor.predict_category("user"))
+    print("For concept plate ", predictor.predict_category("plate"))
+    print("For concept plate ", predictor.predict_category("licence plate"))
+    print("For concept plate ", predictor.predict_category("plate number"))
     print("For concept Day ", predictor.predict_category("day"))
     print("\nFor concept name ", predictor.predict_category("name"))
     print("\nFor concept University ", predictor.predict_category("University"))
